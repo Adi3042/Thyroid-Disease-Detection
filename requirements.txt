@@ -4,5 +4,8 @@ seaborn
 flask
 ipykernel
 scikit-learn
+os
+pickle
+matplotlib
 
 # -e .

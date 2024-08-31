@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Prediction Form</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 center>Thyroid Detection</h1>
+        <form id="predictionForm" method="POST" action="/predict">
+            <table>
+                <tr>
+                    <td><label for="age">Age:</label></td>
+                    <td><input type="number" id="age" name="age" placeholder="e.g. 45" min="0" max="120" required></td>
+                    
+                    <td><label for="sex">Sex:</label></td>
+                    <td>
+                        <select id="sex" name="sex" required>
+                            <option value="" disabled selected>Select your sex</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="on_thyroxine">On Thyroxine:</label></td>
+                    <td>
+                        <select id="on_thyroxine" name="on_thyroxine" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    
+                    <td><label for="on_antithyroid_medication">On Antithyroid Medication:</label></td>
+                    <td>
+                        <select id="on_antithyroid_medication" name="on_antithyroid_medication" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="thyroid_surgery">Thyroid Surgery:</label></td>
+                    <td>
+                        <select id="thyroid_surgery" name="thyroid_surgery" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    
+                    <td><label for="I131_treatment">I131 Treatment:</label></td>
+                    <td>
+                        <select id="I131_treatment" name="I131_treatment" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="lithium">Lithium:</label></td>
+                    <td>
+                        <select id="lithium" name="lithium" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    
+                    <td><label for="goitre">Goitre:</label></td>
+                    <td>
+                        <select id="goitre" name="goitre" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="tumor">Tumor:</label></td>
+                    <td>
+                        <select id="tumor" name="tumor" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    
+                    <td><label for="hypopituitary">Hypopituitary:</label></td>
+                    <td>
+                        <select id="hypopituitary" name="hypopituitary" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="psych">Psych:</label></td>
+                    <td>
+                        <select id="psych" name="psych" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </td>
+                    
+                    <td><label for="T3">T3:</label></td>
+                    <td><input type="number" step="any" id="T3" name="T3" placeholder="e.g. 2.5" min="0" required></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="T4U">T4U:</label></td>
+                    <td><input type="number" step="any" id="T4U" name="T4U" placeholder="e.g. 1.5" min="0" required></td>
+                    
+                    <td><label for="FTI">FTI:</label></td>
+                    <td><input type="number" step="any" id="FTI" name="FTI" placeholder="e.g. 100" min="0" required></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4" class="submit-cell">
+                        <input type="submit" value="Predict">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

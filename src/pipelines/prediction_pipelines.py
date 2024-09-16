@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 from src.exception import CustomException
-from src.logger import logging
+from src.logger import logger
 from src.utils import load_object
 
 class PredictPipeline:
@@ -24,7 +24,7 @@ class PredictPipeline:
             pred = model.predict(data_scaled)
             return pred
         except Exception as e:
-            logging.error("Exception occurred in prediction pipeline")
+            logger.error("Exception occurred in prediction pipeline")
             raise CustomException(e, sys)
 
 class CustomData:
@@ -78,8 +78,8 @@ class CustomData:
                 'I131_treatment': [self.I131_treatment]
             }
             df = pd.DataFrame(custom_data_input_dict)
-            logging.info('Dataframe gathered successfully')
+            logger.info('Dataframe gathered successfully')
             return df
         except Exception as e:
-            logging.error('Exception occurred prediction pipeline while gathering dataframe')
+            logger.error('Exception occurred prediction pipeline while gathering dataframe')
             raise CustomException(e, sys)

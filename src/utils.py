@@ -1,53 +1,52 @@
 import os
 import sys
 import pickle
-import numpy as np 
-import pandas as pd
 from src.exception import CustomException
 from src.logger import logging
+from sklearn.metrics import r2_score, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 
-from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
-
+    
 def save_object(file_path, obj):
+    """
+    Save an object to a file.
+    """
     try:
         dir_path = os.path.dirname(file_path)
-
         os.makedirs(dir_path, exist_ok=True)
-
         with open(file_path, "wb") as file_obj:
             pickle.dump(obj, file_obj)
-
     except Exception as e:
+        logging.error("Exception occurred while saving object", exc_info=True)
         raise CustomException(e, sys)
     
-def evaluate_model(X_train,y_train,X_test,y_test,models):
+def evaluate_model(X_train, y_train, X_test, y_test, models):
+    """
+    Evaluate multiple models and return their performance metrics.
+    """
     try:
         report = {}
-        for i in range(len(models)):
-            model = list(models.values())[i]
-            # Train model
-            model.fit(X_train,y_train)
-
-            # Predict Testing data
-            y_test_pred =model.predict(X_test)
-
-            # Get R2 scores for train and test data
-            #train_model_score = r2_score(ytrain,y_train_pred)
-            test_model_score = r2_score(y_test,y_test_pred)
-
-            report[list(models.keys())[i]] =  test_model_score
-
+        for name, model in models.items():
+            model.fit(X_train, y_train)
+            y_pred = model.predict(X_test)
+            acc = accuracy_score(y_test, y_pred)
+            precision = precision_score(y_test, y_pred, average='weighted')
+            recall = recall_score(y_test, y_pred, average='weighted')
+            f1 = f1_score(y_test, y_pred, average='weighted')
+            roc_auc = roc_auc_score(y_test, model.predict_proba(X_test), multi_class='ovr')
+            report[name] = roc_auc
+            logging.info(f'{name} - Accuracy: {acc:.2f}, Precision: {precision:.2f}, Recall: {recall:.2f}, F1 Score: {f1:.2f}, ROC AUC Score: {roc_auc:.2f}')
         return report
-    
     except Exception as e:
-            logging.info('Exception occured during model training')
-            raise CustomException(e,sys)
+        logging.error('Exception occurred during model evaluation', exc_info=True)
+        raise CustomException(e, sys)
     
-
 def load_object(file_path):
+    """
+    Load an object from a file.
+    """
     try:
-        with open(file_path,'rb') as file_obj:
+        with open(file_path, 'rb') as file_obj:
             return pickle.load(file_obj)
     except Exception as e:
-        logging.info('Exception Occured in load_object function utils')
-        raise CustomException(e,sys)
+        logging.error("Exception Occured in load_object function utils", exc_info=True)
+        raise CustomException(e, sys)
